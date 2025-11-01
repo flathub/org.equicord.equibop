@@ -35,8 +35,6 @@ modules:
       build-options:
           strip: false
           no-debuginfo: true
-          env:
-              SKIP_BUN_DOWNLOAD: "true"
       build-commands:
           - tar xzf node_modules.tar.gz
 
