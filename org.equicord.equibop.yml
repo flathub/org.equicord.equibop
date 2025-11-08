@@ -1,175 +1,172 @@
 app-id: org.equicord.equibop
 
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version "25.08"
+runtime-version: &runtime-version '25.08'
 sdk: org.freedesktop.Sdk
 
 base: org.electronjs.Electron2.BaseApp
 base-version: *runtime-version
 sdk-extensions:
-    - org.freedesktop.Sdk.Extension.node20
+  - org.freedesktop.Sdk.Extension.node20
 
 command: startequibop
 separate-locales: false
 
 finish-args:
-    - --socket=pulseaudio
-    - --socket=fallback-x11
-    - --socket=wayland
-    - --share=ipc
-    - --share=network
-    - --talk-name=org.kde.StatusNotifierWatcher # Tray functionalities on KDE
-    - --talk-name=com.canonical.AppMenu.Registrar
-    - --device=all # Needed for GPU acceleration and the webcam
-    - --filesystem=xdg-videos:ro
-    - --filesystem=xdg-pictures:ro
-    - --filesystem=xdg-download # This and the above two are used for drag-n-drop, and download managing
-    - --filesystem=xdg-run/pipewire-0:ro # Pipewire interfacing
-    - --filesystem=xdg-run/speech-dispatcher:ro # For TTS and VcNarrator
-    - --filesystem=~/.steam # Needed for SteamOS integration, as the XDG OpenURL portal doesn't work properly in Game Mode. We only need ~/.steam/steam.pipe but Flatpak can't correctly mount just that: 'File "/home/deck/.steam/steam.pipe" has unsupported type 0o10000'
-    - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons # This is used to show the correct cursor on Wayland
+  - --socket=pulseaudio
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=ipc
+  - --share=network
+  - --talk-name=org.kde.StatusNotifierWatcher   # Tray functionalities on KDE
+  - --talk-name=com.canonical.AppMenu.Registrar
+  - --device=all   # Needed for GPU acceleration and the webcam
+  - --filesystem=xdg-videos:ro
+  - --filesystem=xdg-pictures:ro
+  - --filesystem=xdg-download   # This and the above two are used for drag-n-drop, and download managing
+  - --filesystem=xdg-run/pipewire-0:ro   # Pipewire interfacing
+  - --filesystem=xdg-run/speech-dispatcher:ro   # For TTS and VcNarrator
+  - --filesystem=~/.steam   # Needed for SteamOS integration, as the XDG OpenURL portal doesn't work properly in Game Mode. We only need ~/.steam/steam.pipe but Flatpak can't correctly mount just that: 'File "/home/deck/.steam/steam.pipe" has unsupported type 0o10000'
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons   # This is used to show the correct cursor on Wayland
 
 modules:
-    - name: Equibop
-      buildsystem: simple
-      build-options:
-          strip: false
-          no-debuginfo: true
-      build-commands:
-          - tar xzf node_modules.tar.gz
+  - name: Equibop
+    buildsystem: simple
+    build-options:
+      strip: false
+      no-debuginfo: true
+    build-commands:
+      - tar xzf node_modules.tar.gz
 
-          - bun-build/bun run build
+      - bun-build/bun run build
 
-          - mkdir -p resources/arrpc
-          - |
-              if [ "$FLATPAK_ARCH" = "x86_64" ]; then
-                  cp arrpc-bun-linux-x64 resources/arrpc/arrpc-linux-x64
-              elif [ "$FLATPAK_ARCH" = "aarch64" ]; then
-                  cp arrpc-bun-linux-arm64 resources/arrpc/arrpc-linux-arm64
-              fi
-              chmod +x resources/arrpc/arrpc-*
-              cp detectable.json detectable_fixes.json resources/arrpc/
+      - mkdir -p resources/arrpc
+      - |
+        if [ "$FLATPAK_ARCH" = "x86_64" ]; then
+            cp arrpc-bun-linux-x64 resources/arrpc/arrpc-linux-x64
+        elif [ "$FLATPAK_ARCH" = "aarch64" ]; then
+            cp arrpc-bun-linux-arm64 resources/arrpc/arrpc-linux-arm64
+        fi
+        chmod +x resources/arrpc/arrpc-*
+        cp detectable.json detectable_fixes.json resources/arrpc/
 
-          - export PATH="$PWD/bun-build:$PATH" && . /usr/lib/sdk/node20/enable.sh && node_modules/.bin/electron-builder --dir --linux dir --config.electronDist=node_modules/electron/dist
+      - export PATH="$PWD/bun-build:$PATH" && . /usr/lib/sdk/node20/enable.sh && node_modules/.bin/electron-builder
+        --dir --linux dir --config.electronDist=node_modules/electron/dist
 
-          - |
-              if [ -d "dist/linux-unpacked" ]; then
-                DIST_DIR="dist/linux-unpacked"
-              elif [ -d "dist/linux-arm64-unpacked" ]; then
-                DIST_DIR="dist/linux-arm64-unpacked"
-              else
-                echo "Error: Could not find unpacked directory"
-                exit 1
-              fi
+      - |
+        if [ -d "dist/linux-unpacked" ]; then
+          DIST_DIR="dist/linux-unpacked"
+        elif [ -d "dist/linux-arm64-unpacked" ]; then
+          DIST_DIR="dist/linux-arm64-unpacked"
+        else
+          echo "Error: Could not find unpacked directory"
+          exit 1
+        fi
 
-              install -Dm644 build/icon.svg /app/share/icons/hicolor/scalable/apps/org.equicord.equibop.svg
+        install -Dm644 build/icon.svg /app/share/icons/hicolor/scalable/apps/org.equicord.equibop.svg
 
-              desktop-file-edit --set-key=Exec --set-value="startequibop %U" build/org.equicord.equibop.desktop
-              install -Dm644 build/org.equicord.equibop.desktop /app/share/applications/org.equicord.equibop.desktop
-              install -Dm755 startequibop /app/bin/startequibop
-              install -D build/org.equicord.equibop.metainfo.xml -t /app/share/metainfo/
+        desktop-file-edit --set-key=Exec --set-value="startequibop %U" build/org.equicord.equibop.desktop
+        install -Dm644 build/org.equicord.equibop.desktop /app/share/applications/org.equicord.equibop.desktop
+        install -Dm755 startequibop /app/bin/startequibop
+        install -D build/org.equicord.equibop.metainfo.xml -t /app/share/metainfo/
 
-              cp --reflink=auto -r "$DIST_DIR" /app/bin/equibop
+        cp --reflink=auto -r "$DIST_DIR" /app/bin/equibop
 
-      sources:
-          - type: file
-            path: startequibop
+    sources:
+      - type: file
+        path: startequibop
 
-          - type: archive
-            url: https://github.com/Equicord/Equibop/archive/refs/tags/v3.1.0.tar.gz
-            sha512: b537b37f8ea562335e007e2a82515ec685609808840095dcd7da69e97195c65ca24a32b440bdcb0d3af5505a34db28bdf6129d610c5aa668e12dd6141ea3b2f7
-            strip-components: 1
-            x-checker-data:
-                type: json
-                url: https://api.github.com/repos/Equicord/Equibop/releases/latest
-                version-query: .tag_name | sub("v"; "")
-                url-query: .tarball_url
-                is-main-source: true
+      - type: archive
+        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.0
+        sha512: 61400f8f40b278db0c3d79c8b99c96ea57044503a66aa958f19955aa833a27bb0d3bab3d017517fa81f90308a15cbfd594e5eea5f3601f8ae56a4f7a47bb3ca8
+        strip-components: 1
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Equicord/Equibop/releases/latest
+          version-query: .tag_name | sub("v"; "")
+          url-query: .tarball_url
+          is-main-source: true
 
-          - type: patch
-            path: sandboxFix.patch
+      - type: patch
+        path: sandboxFix.patch
 
-          - type: patch
-            path: gitHash.patch
+      - type: patch
+        path: gitHash.patch
 
-          - type: file
-            url: https://github.com/Equicord/Equibop/releases/download/v3.1.0/node_modules-x64.tar.gz
-            dest-filename: node_modules.tar.gz
-            sha512: 0343d41b0ad3ab5ed4ad185304ffc84baf7d942fdabbf15f086a8a74e8e322a3037180f3a3b9f9887820b48b7508b740cf8abb7739d0103b1fbad0854338a96b
-            only-arches: [x86_64]
-            x-checker-data:
-                type: json
-                url: https://api.github.com/repos/Equicord/Equibop/releases/latest
-                version-query: .tag_name | sub("v"; "")
-                url-query:
-                    .assets[] | select(.name == "node_modules-x64.tar.gz")
-                    | .browser_download_url
+      - type: file
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.0/node_modules-x64.tar.gz
+        dest-filename: node_modules.tar.gz
+        sha512: 0343d41b0ad3ab5ed4ad185304ffc84baf7d942fdabbf15f086a8a74e8e322a3037180f3a3b9f9887820b48b7508b740cf8abb7739d0103b1fbad0854338a96b
+        only-arches: [x86_64]
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Equicord/Equibop/releases/latest
+          version-query: .tag_name | sub("v"; "")
+          url-query: .assets[] | select(.name == "node_modules-x64.tar.gz") | .browser_download_url
 
-          - type: file
-            url: https://github.com/Equicord/Equibop/releases/download/v3.1.0/node_modules-arm64.tar.gz
-            dest-filename: node_modules.tar.gz
-            sha512: 0925834785c44bc036e38b02ce517466120c51312d14974cd3e2dea99465aa178211d1050c35c45f12492be13a653b8fbd2bb4db25048ccf38fe8fa08fc33f0b
-            only-arches: [aarch64]
-            x-checker-data:
-                type: json
-                url: https://api.github.com/repos/Equicord/Equibop/releases/latest
-                version-query: .tag_name | sub("v"; "")
-                url-query:
-                    .assets[] | select(.name == "node_modules-arm64.tar.gz")
-                    | .browser_download_url
+      - type: file
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.0/node_modules-arm64.tar.gz
+        dest-filename: node_modules.tar.gz
+        sha512: 0925834785c44bc036e38b02ce517466120c51312d14974cd3e2dea99465aa178211d1050c35c45f12492be13a653b8fbd2bb4db25048ccf38fe8fa08fc33f0b
+        only-arches: [aarch64]
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Equicord/Equibop/releases/latest
+          version-query: .tag_name | sub("v"; "")
+          url-query: .assets[] | select(.name == "node_modules-arm64.tar.gz") | .browser_download_url
 
-          - type: archive
-            url: https://github.com/electron/electron/releases/download/v39.0.0/electron-v39.0.0-linux-x64.zip
-            sha512: 9b30e5e72b7582e242f99f825418a8f2db11a0313159574fe4378b11345a73368f61b0fc2de2617098991db2f1b5cd2a9e7e9a4eb404836f8d458337b06142b8
-            dest: node_modules/electron/dist
-            only-arches: [x86_64]
+      - type: archive
+        url: https://github.com/electron/electron/releases/download/v39.0.0/electron-v39.0.0-linux-x64.zip
+        sha512: 9b30e5e72b7582e242f99f825418a8f2db11a0313159574fe4378b11345a73368f61b0fc2de2617098991db2f1b5cd2a9e7e9a4eb404836f8d458337b06142b8
+        dest: node_modules/electron/dist
+        only-arches: [x86_64]
 
-          - type: archive
-            url: https://github.com/electron/electron/releases/download/v39.0.0/electron-v39.0.0-linux-arm64.zip
-            sha512: 8bf92cd2d24b4b64377dd37bad9d32e05cc4ba85efc65506403bc81f837556161d58219f002bcf5bde421cd21dd9237982a73a8463bbd7d971708c1a089a6733
-            dest: node_modules/electron/dist
-            only-arches: [aarch64]
+      - type: archive
+        url: https://github.com/electron/electron/releases/download/v39.0.0/electron-v39.0.0-linux-arm64.zip
+        sha512: 8bf92cd2d24b4b64377dd37bad9d32e05cc4ba85efc65506403bc81f837556161d58219f002bcf5bde421cd21dd9237982a73a8463bbd7d971708c1a089a6733
+        dest: node_modules/electron/dist
+        only-arches: [aarch64]
 
-          - type: archive
-            url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.1/bun-linux-x64.zip
-            sha512: 1fd367254ccff89163b32ee8bf76b7f013855043bf828d36300aaeef95b72139ed6afdab4446e11e85b56b4a57cfd45a2c4d02460a5f1172e35493ad603fc010
-            dest: bun-build
-            only-arches: [x86_64]
-            x-checker-data:
-                type: json
-                url: https://api.github.com/repos/oven-sh/bun/releases/latest
-                version-query: .tag_name | sub("bun-v"; "")
-                url-query: .assets[] | select(.name == "bun-linux-x64.zip") | .browser_download_url
+      - type: archive
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.2/bun-linux-x64.zip
+        sha512: 9b33415f60066037c9d4e4afe58612f1e1ba826dc8d21e4d959b553c9dd71ae301c5c6646afdb77ae83ec7ca057d3ed6625fe347d74badc30c487735f9a1d8cb
+        dest: bun-build
+        only-arches: [x86_64]
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/oven-sh/bun/releases/latest
+          version-query: .tag_name | sub("bun-v"; "")
+          url-query: .assets[] | select(.name == "bun-linux-x64.zip") | .browser_download_url
 
-          - type: archive
-            url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.1/bun-linux-aarch64.zip
-            sha512: 28f96904bcf24f133fedeb0995970ad4f085d16bc700dea46a66c1736074c642034edd445c03153b966cada551df8dd4c86fd85f03a4f820963666da6ea020c5
-            dest: bun-build
-            only-arches: [aarch64]
-            x-checker-data:
-                type: json
-                url: https://api.github.com/repos/oven-sh/bun/releases/latest
-                version-query: .tag_name | sub("bun-v"; "")
-                url-query: .assets[] | select(.name == "bun-linux-aarch64.zip") | .browser_download_url
+      - type: archive
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.2/bun-linux-aarch64.zip
+        sha512: c9faa81ff20e4365081d7bac1d7ec6677d4e912d7ad69f885532dd43cdf150f495ce8fd152b8218bff716adc1a026fb10948b74e9e1b7d82c7ae7c467fc59a8a
+        dest: bun-build
+        only-arches: [aarch64]
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/oven-sh/bun/releases/latest
+          version-query: .tag_name | sub("bun-v"; "")
+          url-query: .assets[] | select(.name == "bun-linux-aarch64.zip") | .browser_download_url
 
-          - type: file
-            url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.2.9/arrpc-bun-linux-x64
-            sha512: 5ca183e27603a7041a4e70f141ac430afc2157e9743ebac3ff48fb2d6689379be0a6e708e193a5124ddbf7a5af3f6f3d8bf09fb143454d3d693531538fcc8eee
-            dest-filename: arrpc-bun-linux-x64
-            only-arches: [x86_64]
+      - type: file
+        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.2.9/arrpc-bun-linux-x64
+        sha512: 5ca183e27603a7041a4e70f141ac430afc2157e9743ebac3ff48fb2d6689379be0a6e708e193a5124ddbf7a5af3f6f3d8bf09fb143454d3d693531538fcc8eee
+        dest-filename: arrpc-bun-linux-x64
+        only-arches: [x86_64]
 
-          - type: file
-            url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.2.9/arrpc-bun-linux-arm64
-            sha512: 4a101eb84d209a5a6a95f363ecdaa3bdf5243a831b2af4f1bd291fa532f00bd4c5e70aceb1650cdf3f559487b3cf125d26df0b175758838cbb925f03f0146070
-            dest-filename: arrpc-bun-linux-arm64
-            only-arches: [aarch64]
+      - type: file
+        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.2.9/arrpc-bun-linux-arm64
+        sha512: 4a101eb84d209a5a6a95f363ecdaa3bdf5243a831b2af4f1bd291fa532f00bd4c5e70aceb1650cdf3f559487b3cf125d26df0b175758838cbb925f03f0146070
+        dest-filename: arrpc-bun-linux-arm64
+        only-arches: [aarch64]
 
-          - type: file
-            url: https://raw.githubusercontent.com/Creationsss/arrpc-bun/v1.2.9/detectable.json
-            sha512: 68a6ce1f08cdeb70fee4172ed7e533b2c5362f07eacf502f88d8109c8d0bcf267583ed80e8924e46d7c0fb396981d01cd759257c2dcaa4a92e832673b7b72e89
-            dest-filename: detectable.json
+      - type: file
+        url: https://raw.githubusercontent.com/Creationsss/arrpc-bun/v1.2.9/detectable.json
+        sha512: 68a6ce1f08cdeb70fee4172ed7e533b2c5362f07eacf502f88d8109c8d0bcf267583ed80e8924e46d7c0fb396981d01cd759257c2dcaa4a92e832673b7b72e89
+        dest-filename: detectable.json
 
-          - type: file
-            url: https://raw.githubusercontent.com/Creationsss/arrpc-bun/v1.2.9/detectable_fixes.json
-            sha512: 40e4a1b7a492906554a1f7746c4c3e2d6e637735bd8d1e1636c08d5fc5cd5bb4b3343cef04cac330bef7e1ea8c5d6e4335ffe156bfadbc43bdb42f7a89c2afe4
-            dest-filename: detectable_fixes.json
+      - type: file
+        url: https://raw.githubusercontent.com/Creationsss/arrpc-bun/v1.2.9/detectable_fixes.json
+        sha512: 40e4a1b7a492906554a1f7746c4c3e2d6e637735bd8d1e1636c08d5fc5cd5bb4b3343cef04cac330bef7e1ea8c5d6e4335ffe156bfadbc43bdb42f7a89c2afe4
+        dest-filename: detectable_fixes.json
