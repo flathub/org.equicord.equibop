@@ -18,6 +18,7 @@ finish-args:
   - --socket=wayland
   - --share=ipc
   - --share=network
+  - --talk-name=org.kde.StatusNotifierWatcher
   - --own-name=org.equicord.equibop.StatusNotifierItem   # Needed for libvesktop native tray
   - --talk-name=com.canonical.AppMenu.Registrar
   - --device=all   # Needed for GPU acceleration and the webcam
