@@ -55,11 +55,11 @@ modules:
 
         mkdir -p "$DIST_DIR/resources/app.asar.unpacked/static/dist"
         if [ "$FLATPAK_ARCH" = 'x86_64' ]; then
-            cp arrpc-bun-linux-x64 "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc-linux-x64"
+            cp arrpc-bun-linux-x64 "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc"
         elif [ "$FLATPAK_ARCH" = 'aarch64' ]; then
-            cp arrpc-bun-linux-arm64 "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc-linux-arm64"
+            cp arrpc-bun-linux-arm64 "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc"
         fi
-        chmod +x "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc-"*
+        chmod +x "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc"
 
         install -Dm644 build/icon.svg /app/share/icons/hicolor/scalable/apps/org.equicord.equibop.svg
 
@@ -75,9 +75,9 @@ modules:
         path: startequibop
 
       - type: archive
-        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.3
-        dest-filename: equibop-v3.1.3.tar.gz
-        sha512: 1dd2329788ef12f9d00ff2ec93eb5964a8f9420c2230e20a15356b4d5ead4e80904bdb3c6ff47f2a59a365f435f6e560e618fd153418c7c0759b219c7f829f1c
+        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.4
+        dest-filename: equibop-v3.1.4.tar.gz
+        sha512: 4265673caaed62bc49fb1e96b8b21e25b3204b03d1e9378fca31f49e3c22faf214b5c78df5f2699915e32848151dd3a96ddfe370271b83fc7e800c5fbf62b896
         strip-components: 1
         x-checker-data:
           type: json
@@ -96,9 +96,9 @@ modules:
         path: arrpcPath.patch
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.3/node_modules-x64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.4/node_modules-x64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 814b6248cbacde87117bbf5b27aaf054f67ca75277eb8f2b18d6209bcb7595a49bf6eae7910b3f80388b4a5aed596f1562b3712b6243d03bff4df10aa86d61d6
+        sha512: 439c37e6c2ef7ce6c199f7416708a821a9a0e39c7a114b1e2809b3451485c8f3da32db83ba1dc687b34743a3a8a5b8fe30a2987a558e12171ca66539b1ea1d44
         only-arches: [x86_64]
         x-checker-data:
           type: json
@@ -107,9 +107,9 @@ modules:
           url-query: .assets[] | select(.name == "node_modules-x64.tar.gz") | .browser_download_url
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.3/node_modules-arm64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.4/node_modules-arm64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 6d55b654e65ab8a6dea9c51121fa117cc7bc33886230d9deebf8fa6b0c4792d02c9812d30bf735a492e69ad9a2be1fde1e6ca487b284d2db71a53624a42de370
+        sha512: 27305109cb1c80351f53b633561411d78cbf8c36d07cc9955fed11d9bf7ad4e8727860960c97a1364ee26489c2b1aab65288cbffd41b047c1c426e816976e5b0
         only-arches: [aarch64]
         x-checker-data:
           type: json
