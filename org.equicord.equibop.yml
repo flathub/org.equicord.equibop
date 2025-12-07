@@ -131,8 +131,8 @@ modules:
         only-arches: [aarch64]
 
       - type: archive
-        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.3/bun-linux-x64.zip
-        sha512: cfc496cfa149fddabfe799ee0c492d3f5499746a0b67ce720ef8b0fd9f7cf42ef27afa05a00a1ed5936e1f100586e0d966c4cce33ef9a8b7f588df6ca1cf52e9
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.4/bun-linux-x64.zip
+        sha512: f8ffad43181d350043dbe665d246f1502552f2c63b49ed0af03a63c39bd3123dc99590f955ebc88c678ce20a91f3ade346fc334fd57d45c3de709611a5796b11
         dest: bun-build
         only-arches: [x86_64]
         x-checker-data:
@@ -142,8 +142,8 @@ modules:
           url-query: .assets[] | select(.name == "bun-linux-x64.zip") | .browser_download_url
 
       - type: archive
-        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.3/bun-linux-aarch64.zip
-        sha512: ec0aabbf47c88870a6bb95f5a0f074cb61d15bd59c09837ac05eb5e78bb5c7717c9e9d91eaaa03f511c8947ea4be2033dfe1333d85e349134f9567336efe4b76
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.4/bun-linux-aarch64.zip
+        sha512: 363bb1a015285fb9ed50c94adb2016f8d99e181c3d61a7b7691882f7adee0d5f55e7c9175cfee65c4da8ba349199d17da9e3018f04cd0e3e8ab1cfe7b494d621
         dest: bun-build
         only-arches: [aarch64]
         x-checker-data:
