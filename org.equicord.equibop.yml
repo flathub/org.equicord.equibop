@@ -153,14 +153,14 @@ modules:
           url-query: .assets[] | select(.name == "bun-linux-aarch64.zip") | .browser_download_url
 
       - type: file
-        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.3.1/arrpc-bun-linux-x64
-        sha512: b7082e7b77937b38ddf3a2f99068ddbe3e6e7f1953a2ff881c0d729be009b3560d0ef71cb11089ae068ad8b52048c232b661730c955b31f85d96316ca35f7389
+        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.3.4/arrpc-bun-linux-x64
+        sha512: f7fdd50cb339f57d86a87e4b99c576e38f3ec4d98be74e40a50876ca43451955993f4c2ed2c7a4cd0b91dd263c450a38e97f336974a430c3614b049e26aee80e
         dest-filename: arrpc-bun-linux-x64
         only-arches: [x86_64]
 
       - type: file
-        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.3.1/arrpc-bun-linux-arm64
-        sha512: 51aaf370dd4fe3a60a588ec8caec9c37ef9c686e2414408c5c8558195fa27e97558c2bede4f8aa1f6a1d4549c1ce6a150a566b78ed58ae1d0d496bd9c38288d3
+        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.3.4/arrpc-bun-linux-arm64
+        sha512: 19da5dc3d7da68044f03714de3176a36683ed817d2a3c67d47d373e8911bf5f9162ad49cedfaca7c6137f027c418a410e1e5d636ff803340ea74aa07aa9515bf
         dest-filename: arrpc-bun-linux-arm64
         only-arches: [aarch64]
 
