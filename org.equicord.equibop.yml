@@ -54,13 +54,11 @@ modules:
           exit 1
         fi
 
-        mkdir -p "$DIST_DIR/resources/app.asar.unpacked/static/dist"
         if [ "$FLATPAK_ARCH" = 'x86_64' ]; then
-            cp arrpc-bun-linux-x64 "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc"
+            install -Dm755 arrpc-bun-linux-x64 /app/bin/arrpc-bun
         elif [ "$FLATPAK_ARCH" = 'aarch64' ]; then
-            cp arrpc-bun-linux-arm64 "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc"
+            install -Dm755 arrpc-bun-linux-arm64 /app/bin/arrpc-bun
         fi
-        chmod +x "$DIST_DIR/resources/app.asar.unpacked/static/dist/arrpc"
 
         install -Dm644 build/icon.svg /app/share/icons/hicolor/scalable/apps/org.equicord.equibop.svg
 
@@ -92,9 +90,6 @@ modules:
 
       - type: patch
         path: gitHash.patch
-
-      - type: patch
-        path: arrpcPath.patch
 
       - type: file
         url: https://github.com/Equicord/Equibop/releases/download/v3.1.6/node_modules-x64.tar.gz
