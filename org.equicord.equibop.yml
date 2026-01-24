@@ -155,7 +155,7 @@ modules:
 
       - type: file
         url: https://github.com/Equicord/Equibop/releases/download/v3.1.7/org.equicord.equibop.metainfo.xml
-        sha512: 7dd5f14f7aefb05bb691bd647121df8e8d2238612f4f6db3c7f90296c572de83a3e562431ed4d2b05bc9819145d270817f26a4184e8253437ab3556ac6fd7ecf
+        sha512: 0251b014ea1e4a0124f7c88693549667138fd8b16cd6b63f3edecf710dbc5e2e39107994c35049580768c6c74f563ac87b3937fe1942c225ae1fa57d01745ead
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Equicord/Equibop/releases/latest
