@@ -74,9 +74,9 @@ modules:
         path: startequibop
 
       - type: archive
-        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.6
-        dest-filename: equibop-v3.1.5.tar.gz
-        sha512: 52f33b1157a249b41c068bc68de9d46ef42d3fba3274f5c03b59a108d554567f5ca6a546fb6ff5c6c7698fcceaf4a84f2eae2cbd28b2a333a63ef800c02b85e0
+        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.7
+        dest-filename: equibop-v3.1.7.tar.gz
+        sha512: 8c79ef54643d198586fa2ef819fa11af6dd1d952b897a2903eab3bba7b4255461691d1ceb66b26031884a48c7e5e152b426a2fb995fdff6f47a861bf9cfb8e1f
         strip-components: 1
         x-checker-data:
           type: json
@@ -85,16 +85,10 @@ modules:
           url-query: .tarball_url
           is-main-source: true
 
-      - type: patch
-        path: sandboxFix.patch
-
-      - type: patch
-        path: gitHash.patch
-
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.6/node_modules-x64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.7/node_modules-x64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: b0bf09aff57f39c007babce08dfc3b875f4558520d330472deafa91f53564118763bd7c6376e4530a8d565930ff5d83c904d2e7e9054791b50b040aa5b06e936
+        sha512: 340c3e6a782e75c60098731b2a18d28ea06a209bf7b924ad904495ae7dd65f8ea901a2dc7b8b7ed33e358f5dc27ccade8d3f9e3f0856f30994a0f7b560535b92
         only-arches: [x86_64]
         x-checker-data:
           type: json
@@ -103,9 +97,9 @@ modules:
           url-query: .assets[] | select(.name == "node_modules-x64.tar.gz") | .browser_download_url
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.6/node_modules-arm64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.7/node_modules-arm64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 4397a12fb854cd1591253fd96382a40c4ed8ea2d0351adc820aa9d8c7974f1568d778b4c5053ee7db2df01a39ea03bf7f9202e46bdb1ab4cf553532737ba8f08
+        sha512: 8f3aa1cc6ea69c28f9f1dc8a0d2047c702c53a69345faac9a6a54e32477f01908c2b8099f7d844aba2298057be7e2bd1cf78e7ed5ee1fdd41540f118eb566321
         only-arches: [aarch64]
         x-checker-data:
           type: json
@@ -114,20 +108,20 @@ modules:
           url-query: .assets[] | select(.name == "node_modules-arm64.tar.gz") | .browser_download_url
 
       - type: archive
-        url: https://github.com/electron/electron/releases/download/v39.2.1/electron-v39.2.1-linux-x64.zip
-        sha512: aa22f877c482ec3be3a59545894dda78370a7b62535eb3571475cc76b41fc4a2799208ae6d9637de1302c954b8a1a020534c996a1f1de0954d52375d72414a90
+        url: https://github.com/electron/electron/releases/download/v40.0.0/electron-v40.0.0-linux-x64.zip
+        sha512: 016b10ab8b813fd1cdd78a853db92efd9f7f893f3f03efb2b8f5bde0834640660e0487df6d19b417ea098a59b1ff2256fd71ac9a3c2cdb7b3768fb65a094b8ea
         dest: node_modules/electron/dist
         only-arches: [x86_64]
 
       - type: archive
-        url: https://github.com/electron/electron/releases/download/v39.2.1/electron-v39.2.1-linux-arm64.zip
-        sha512: 5e56357a3be7a9ec93e337531260f9277cd3275e63135de665c6317b7ac53b489c316e83512efe72477c4da03bb2c5eb9ce29a7ae7de4d9665cc612477ce5148
+        url: https://github.com/electron/electron/releases/download/v40.0.0/electron-v40.0.0-linux-arm64.zip
+        sha512: 9f31569598764d94463d543f91f45978f2da3a7d1a42a937059edc8744e47ab1bc5ed86c0303100754b55c0ca379e6a184df0431c54eb0a4156cf4f32428573a
         dest: node_modules/electron/dist
         only-arches: [aarch64]
 
       - type: archive
-        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-x64.zip
-        sha512: d4c09bb174717d782beca3b544fcc940b21fd544ac2b0288bdd1bc4c2453a2433cfa630e18a1fbe19a379c41c7e232d039764a14585fbff9a4922d9d81a81523
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.6/bun-linux-x64.zip
+        sha512: 6a6673c33817257537afdf16f416d0cd2c46f0dc52019930e986f7e206536f956ae37d56657e9d0a60f125eae792de3eb19cffa0c5ce4371a98cf5ae67ba9127
         dest: bun-build
         only-arches: [x86_64]
         x-checker-data:
@@ -137,8 +131,8 @@ modules:
           url-query: .assets[] | select(.name == "bun-linux-x64.zip") | .browser_download_url
 
       - type: archive
-        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.5/bun-linux-aarch64.zip
-        sha512: d67c0909787e9d6124135fcca1486d9c657ad0540537b2d721b7c8d2a66e02776792769a51e80d56a3e0c2fb041ebc8df6106fd0e6ff78ca9590b47d29ed3945
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.6/bun-linux-aarch64.zip
+        sha512: 09c43605e8b0c418cf89e04e29dd480100498e0a718b3e63b2cfa4331727e2fcedfe8fafa91900e8b89f9b8d16cc33dd13f3b5e7dc23a9abcdcbcd442ba623b1
         dest: bun-build
         only-arches: [aarch64]
         x-checker-data:
@@ -160,8 +154,8 @@ modules:
         only-arches: [aarch64]
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.6/org.equicord.equibop.metainfo.xml
-        sha512: 51539ebc54ef7c28bbbd6c23c6c401b9b866fac52e61dd24f22d528dd25d3f9cd30075bb6864c898a435ff7814e639a3f87e3fc4758a73be68c83b057bd11c27
+        url: https://github.com/Equicord/Equibop/releases/download/v3.1.7/org.equicord.equibop.metainfo.xml
+        sha512: 0251b014ea1e4a0124f7c88693549667138fd8b16cd6b63f3edecf710dbc5e2e39107994c35049580768c6c74f563ac87b3937fe1942c225ae1fa57d01745ead
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Equicord/Equibop/releases/latest
