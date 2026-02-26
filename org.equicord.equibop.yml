@@ -75,7 +75,7 @@ modules:
 
       - type: archive
         url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.9
-        dest-filename: equibop-v3.1.7.tar.gz
+        dest-filename: equibop-v3.1.9.tar.gz
         sha512: 913b6918128dd0a31eb8cf3abe063665be597bfcac6f7b34e167ce438723db428b95b86bad294b37363708e5b08c3fcd6045ee89412a72131cb8c54ac42efea4
         strip-components: 1
         x-checker-data:
