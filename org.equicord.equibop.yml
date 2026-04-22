@@ -74,9 +74,9 @@ modules:
         path: startequibop
 
       - type: archive
-        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.1.9
+        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.2.0
         dest-filename: equibop-v3.1.9.tar.gz
-        sha512: 913b6918128dd0a31eb8cf3abe063665be597bfcac6f7b34e167ce438723db428b95b86bad294b37363708e5b08c3fcd6045ee89412a72131cb8c54ac42efea4
+        sha512: 498292da19fabce30ef8ee90064cad82956fdc414fe6c1970059a75910ca349e519a98f30fe1b822b403f8f0f268f2bf34192c33ad173da101f593e4ca724aee
         strip-components: 1
         x-checker-data:
           type: json
@@ -86,9 +86,9 @@ modules:
           is-main-source: true
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.9/node_modules-x64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.2.0/node_modules-x64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 39cc907c37f47a663809133cfac7ac0af6dbb4e3cd528d561a040669b5b611a92a124ab10d2f90d5e1f5c5fc474cb15fcecfedf0c35cfebd4a8f7f9a9931e556
+        sha512: 991c564663668ccc5e8a9e47d7c771fda2787e69b9cc57e095c8859d522b6f9162401936f54d14231527ef8c868fd44354912dba7c9478708ce7d162bed95300
         only-arches: [x86_64]
         x-checker-data:
           type: json
@@ -97,9 +97,9 @@ modules:
           url-query: .assets[] | select(.name == "node_modules-x64.tar.gz") | .browser_download_url
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.9/node_modules-arm64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.2.0/node_modules-arm64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 4593a83735f85c472d27ee69d27c6d2aa98038a2eff7d2387b55d0231c134ea3910b8e950484f85862a94b964636ca7bcb51ba38ce1a15cb1cd05cf39ad2a2d7
+        sha512: 4fcfcd534957fe8fb8fbc5492e9b1ca59db23eb793cfe6b3b6a272c51f9070406dec37ba2113523797629852101ed509d089fcbd386285d559c670064ff2746e
         only-arches: [aarch64]
         x-checker-data:
           type: json
@@ -120,8 +120,8 @@ modules:
         only-arches: [aarch64]
 
       - type: archive
-        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.11/bun-linux-x64.zip
-        sha512: e7322a364a6b51d07a4d3c9fe301375f49715717c8d7584f2070d9e278c47e2dae2336f0b8f8d1c31997022f0ad94671f53773b97bfe0dba06f00ebdd9304a40
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-linux-x64.zip
+        sha512: 5709f0799a7221075eabbd406fe1fd19d1de57c713654cdfecda2af850f77052f964de1a92da3ee2ef4e3dbc6fea32668961049b75a4d723d2db7d284943d91b
         dest: bun-build
         only-arches: [x86_64]
         x-checker-data:
@@ -131,8 +131,8 @@ modules:
           url-query: .assets[] | select(.name == "bun-linux-x64.zip") | .browser_download_url
 
       - type: archive
-        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.11/bun-linux-aarch64.zip
-        sha512: d6c8a6c9aeab2faed12a011c6a6198691e0384c216a924711df2f8d4487e2a8a0f009c0fe473fb2fe4181fcbe5fdab530ea4df339f3c34f546a0d4ea2627e2b5
+        url: https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-linux-aarch64.zip
+        sha512: 8b33788f2518caabd8fa9a8e4e777562e79d9218a53d113f2f24717bb6f9213aaa5381796c55a8f5c801ac49096fb98205a56eee2a384e5467d7528a1c3aad42
         dest: bun-build
         only-arches: [aarch64]
         x-checker-data:
@@ -154,8 +154,8 @@ modules:
         only-arches: [aarch64]
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.1.9/org.equicord.equibop.metainfo.xml
-        sha512: 4670724b4d47c83394067228a931512a70ea13dc03aa75cf14b2f50a031499338cf21b6c02fcb78063251cc72d73f5d4c732a3821369918dd975df77b442c2c8
+        url: https://github.com/Equicord/Equibop/releases/download/v3.2.0/org.equicord.equibop.metainfo.xml
+        sha512: 2631f19c5f4fe3faac3f5b7206944cfc8f385690def0ad5174b5abd06e272d4dc133babe86f6dd7013545f9c70e148f5c4454db90febbdafc11594da67e6dfb4
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Equicord/Equibop/releases/latest
