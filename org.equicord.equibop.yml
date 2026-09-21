@@ -110,12 +110,14 @@ modules:
         url: https://github.com/electron/electron/releases/download/v40.0.0/electron-v40.0.0-linux-x64.zip
         sha512: 016b10ab8b813fd1cdd78a853db92efd9f7f893f3f03efb2b8f5bde0834640660e0487df6d19b417ea098a59b1ff2256fd71ac9a3c2cdb7b3768fb65a094b8ea
         dest: node_modules/electron/dist
+        strip-components: 0
         only-arches: [x86_64]
 
       - type: archive
         url: https://github.com/electron/electron/releases/download/v40.0.0/electron-v40.0.0-linux-arm64.zip
         sha512: 9f31569598764d94463d543f91f45978f2da3a7d1a42a937059edc8744e47ab1bc5ed86c0303100754b55c0ca379e6a184df0431c54eb0a4156cf4f32428573a
         dest: node_modules/electron/dist
+        strip-components: 0
         only-arches: [aarch64]
 
       - type: archive
