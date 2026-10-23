@@ -73,9 +73,9 @@ modules:
         path: startequibop
 
       - type: archive
-        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.3.1
+        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.3.2
         dest-filename: equibop-v3.1.9.tar.gz
-        sha512: 7304e260450904a7cee311e7b0f0d0a79fe6397b6015bd6ac36ab6d676c946aba48c439cfbbe820b208841d6ec0cd8d3c6d4af246eadc5100cdba5be15afec27
+        sha512: 830eb7f5e6a1e6e8c9b6f716e016d58ffcff01a25166a35303deb9874ef3bbdce5afbb14d631775e2018fb7e5fdcb9b29fb17ced829edff164ac488f1a1c9cff
         strip-components: 1
         x-checker-data:
           type: json
