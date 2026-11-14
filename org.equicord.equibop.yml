@@ -73,9 +73,9 @@ modules:
         path: startequibop
 
       - type: archive
-        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.3.3
+        url: https://api.github.com/repos/Equicord/Equibop/tarball/v3.3.2
         dest-filename: equibop-v3.1.9.tar.gz
-        sha512: 1fd6e1ffe49680a82cb74783e2f03f653e31a027723bc64eaae22c826b330d5dd18c4671ebe11e63e89dc758efd98a9583f89e4aa6048e9aefc69d11ab475592
+        sha512: 830eb7f5e6a1e6e8c9b6f716e016d58ffcff01a25166a35303deb9874ef3bbdce5afbb14d631775e2018fb7e5fdcb9b29fb17ced829edff164ac488f1a1c9cff
         strip-components: 1
         x-checker-data:
           type: json
@@ -85,9 +85,9 @@ modules:
           is-main-source: true
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.3.3/node_modules-x64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.3.2/node_modules-x64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 2c392b8974214ce74581ed88edfa6b2e6fe13bb9e33d88cbd034661954bef303b32da0efc183b42dee65d43560fdb3001871c69fbfc59d3d2bfd738ba6577173
+        sha512: c63af8b2a78c6ab2b16a9c1f0700164f36f9b9283305a42d120344719d67602d64f77a02eed4644df4ad07697792ab5501f5decf48898c85ba9cb6fc422ddbbe
         only-arches: [x86_64]
         x-checker-data:
           type: json
@@ -96,9 +96,9 @@ modules:
           url-query: .assets[] | select(.name == "node_modules-x64.tar.gz") | .browser_download_url
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.3.3/node_modules-arm64.tar.gz
+        url: https://github.com/Equicord/Equibop/releases/download/v3.3.2/node_modules-arm64.tar.gz
         dest-filename: node_modules.tar.gz
-        sha512: 686cc138765bc59fc70732cf045e30eb1d07cb666b9ee721e71bad7954bf4a37c941a239b4e841e6214cd36ad14d68bab69a518caa91a4aeaa96190182e43279
+        sha512: d54faca2407b02c9678fa29193f0df9fb9d50b84c943ad3787c37b7b2c2079d0f68078b797f9958788975fbe893a32233ed4ac8979ca762e0bccfde1ef01aa89
         only-arches: [aarch64]
         x-checker-data:
           type: json
@@ -153,8 +153,8 @@ modules:
         only-arches: [aarch64]
 
       - type: file
-        url: https://github.com/Equicord/Equibop/releases/download/v3.3.3/org.equicord.equibop.metainfo.xml
-        sha512: 44efd5996554a834d8ff39b934294f7f29f7a6891d5efa439d28f972b3332e00bf6e68483b786d66b28fded34db81515a2a008054868612c872f28d176c74ddc
+        url: https://github.com/Equicord/Equibop/releases/download/v3.3.2/org.equicord.equibop.metainfo.xml
+        sha512: ea1d60580782e5d42b42da2f3f6dada0bfdf1061ac8ea8ee057ddfcfcf26353fe473cdb18c23ab8785159527406dee4e1f5322d277e6e99500e0d847f4907f2a
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Equicord/Equibop/releases/latest
