@@ -1,13 +1,13 @@
 app-id: org.equicord.equibop
 
 runtime: org.freedesktop.Platform
-runtime-version: &runtime-version '25.08'
+runtime-version: &runtime-version '26.08'
 sdk: org.freedesktop.Sdk
 
 base: org.electronjs.Electron2.BaseApp
 base-version: *runtime-version
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.node20
+  - org.freedesktop.Sdk.Extension.node24
 
 command: startequibop
 separate-locales: false
@@ -40,7 +40,7 @@ modules:
 
       - bun-build/bun run build
 
-      - export PATH="$PWD/bun-build:$PATH" && . /usr/lib/sdk/node20/enable.sh && node_modules/.bin/electron-builder
+      - export PATH="$PWD/bun-build:$PATH" && . /usr/lib/sdk/node24/enable.sh && node_modules/.bin/electron-builder
         --dir --linux dir --config.electronDist=node_modules/electron/dist
 
       - |
@@ -51,12 +51,6 @@ modules:
         else
           echo 'Error: Could not find unpacked directory'
           exit 1
-        fi
-
-        if [ "$FLATPAK_ARCH" = 'x86_64' ]; then
-            install -Dm755 arrpc-bun-linux-x64 /app/bin/arrpc-bun
-        elif [ "$FLATPAK_ARCH" = 'aarch64' ]; then
-            install -Dm755 arrpc-bun-linux-arm64 /app/bin/arrpc-bun
         fi
 
         install -Dm644 build/icon.svg /app/share/icons/hicolor/scalable/apps/org.equicord.equibop.svg
@@ -110,12 +104,14 @@ modules:
         url: https://github.com/electron/electron/releases/download/v40.0.0/electron-v40.0.0-linux-x64.zip
         sha512: 016b10ab8b813fd1cdd78a853db92efd9f7f893f3f03efb2b8f5bde0834640660e0487df6d19b417ea098a59b1ff2256fd71ac9a3c2cdb7b3768fb65a094b8ea
         dest: node_modules/electron/dist
+        strip-components: 0
         only-arches: [x86_64]
 
       - type: archive
         url: https://github.com/electron/electron/releases/download/v40.0.0/electron-v40.0.0-linux-arm64.zip
         sha512: 9f31569598764d94463d543f91f45978f2da3a7d1a42a937059edc8744e47ab1bc5ed86c0303100754b55c0ca379e6a184df0431c54eb0a4156cf4f32428573a
         dest: node_modules/electron/dist
+        strip-components: 0
         only-arches: [aarch64]
 
       - type: archive
@@ -139,18 +135,6 @@ modules:
           url: https://api.github.com/repos/oven-sh/bun/releases/latest
           version-query: .tag_name | sub("bun-v"; "")
           url-query: .assets[] | select(.name == "bun-linux-aarch64.zip") | .browser_download_url
-
-      - type: file
-        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.3.4/arrpc-bun-linux-x64
-        sha512: f7fdd50cb339f57d86a87e4b99c576e38f3ec4d98be74e40a50876ca43451955993f4c2ed2c7a4cd0b91dd263c450a38e97f336974a430c3614b049e26aee80e
-        dest-filename: arrpc-bun-linux-x64
-        only-arches: [x86_64]
-
-      - type: file
-        url: https://github.com/Creationsss/arrpc-bun/releases/download/v1.3.4/arrpc-bun-linux-arm64
-        sha512: 19da5dc3d7da68044f03714de3176a36683ed817d2a3c67d47d373e8911bf5f9162ad49cedfaca7c6137f027c418a410e1e5d636ff803340ea74aa07aa9515bf
-        dest-filename: arrpc-bun-linux-arm64
-        only-arches: [aarch64]
 
       - type: file
         url: https://github.com/Equicord/Equibop/releases/download/v3.3.4/org.equicord.equibop.metainfo.xml
